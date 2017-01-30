@@ -1,24 +1,21 @@
+var path = require("path");
+
 module.exports = {
-    entry: [
-        "App/Todo-list/App.js"
-    ],
+    entry: path.resolve(__dirname, "App") + "/Todo-list/App.js",
     output: {
-        path: __dirname,
-        filename: "App/App.js"
+        path: path.resolve(__dirname, "App"),
+        filename: "App.js"
     },
     resolve: {
         root: __dirname,
-        alias:{
-            
-        },
-        extensions: ["", "js", "jsx"]
+        extensions: ["", ".js", ".jsx"]
     },
     module: {
         loaders: [
             {
                 loader: "babel-loader",
                 query:{
-                    presets: ["react", "es2015", "stage-0"]
+                    presets: ["react", "es2015"]
                 },
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/
