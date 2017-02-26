@@ -1,29 +1,38 @@
-var path = require("path");
+var webpack = require("webpack");
+const path = require('path');
 
 module.exports = {
-    entry: path.resolve(__dirname, "App") + "/Todo-list/App.js",
+    entry: [
+        "script-loader!jquery/dist/jquery.min.js",
+        "script-loader!foundation-sites/dist/js/foundation.min.js",
+        "./App/App.js"
+    ],
+    externals: {
+        jquery: "jQuery"
+    },
     output: {
-        path: path.resolve(__dirname, "App"),
-        filename: "App.js"
+        filename: "bundle.js",
+        path: __dirname + "/dist"
     },
     resolve: {
-        root: __dirname,
-        extensions: ["", ".js", ".jsx"]
+        modules: [
+            "node_modules",
+            path.resolve(__dirname)
+        ],
+        alias:{
+            
+        },
+        extensions: [" ", ".js", ".jsx"]
     },
     module: {
         loaders: [
-            {
-                loader: "babel-loader",
-                query:{
-                    presets: ["react", "es2015"]
-                },
-                test: /\.jsx?$/,
-                exclude: /(node_modules)/
-            },
-            {
-                test:/\.css$/,
-                loader: "style-loader | css-loader"
-            }
+            {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery"
+        })
+    ]
 };
