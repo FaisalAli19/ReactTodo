@@ -17,10 +17,10 @@ module.exports = {
     resolve: {
         modules: [
             "node_modules",
-            path.resolve(__dirname)
+            "./App/components"
         ],
         alias:{
-            
+
         },
         extensions: [" ", ".js", ".jsx"]
     },
