@@ -29,6 +29,11 @@ module.exports = {
             {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
         ]
     },
+    devServer: {
+        contentBase: path.join(__dirname, "dist"),
+        port: 9000,
+        stats: "errors-only"
+    },
     plugins: [
         new webpack.ProvidePlugin({
             "$": "jquery",
