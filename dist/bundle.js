@@ -22234,14 +22234,18 @@ module.exports = AddTodo;
 const React = __webpack_require__(29);
 
 var Todo = React.createClass({
-    displayName: 'Todo',
+    displayName: "Todo",
+
 
     render: function () {
-        var { text } = this.props;
+        var { id, text, completed } = this.props;
 
         return React.createElement(
-            'div',
-            null,
+            "div",
+            { onClick: () => {
+                    this.props.onToggle(id);
+                } },
+            React.createElement("input", { type: "checkbox", checked: completed }),
             text
         );
     }
@@ -22267,13 +22271,16 @@ var TodoApp = React.createClass({
         return {
             todos: [{
                 id: uuid(),
-                text: "Take a Walk"
+                text: "Take a Walk",
+                completed: false
             }, {
                 id: uuid(),
-                text: "Bring cheese"
+                text: "Bring cheese",
+                completed: true
             }, {
                 id: uuid(),
-                text: "Competed React Todo App"
+                text: "Competed React Todo App",
+                completed: false
             }],
             showCompleted: false,
             searchText: ""
@@ -22283,8 +22290,21 @@ var TodoApp = React.createClass({
         this.setState({
             todos: [...this.state.todos, {
                 id: uuid(),
-                text: text
+                text: text,
+                completed: false
             }]
+        });
+    },
+    handleToggle: function (id) {
+        var updatedTodos = this.state.todos.map(todo => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+
+        this.setState({
+            todos: updatedTodos
         });
     },
     handleSearch: function (showCompleted, searchText) {
@@ -22300,7 +22320,7 @@ var TodoApp = React.createClass({
             'div',
             null,
             React.createElement(TodoSearch, { onSearch: this.handleSearch }),
-            React.createElement(TodoList, { todos: todos }),
+            React.createElement(TodoList, { todos: todos, onToggle: this.handleToggle }),
             React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
         );
     }
@@ -22325,7 +22345,7 @@ var TodoList = React.createClass({
         var { todos } = this.props;
         var renderTodos = () => {
             return todos.map(todo => {
-                return React.createElement(Todo, _extends({ key: todo.id }, todo));
+                return React.createElement(Todo, _extends({ key: todo.id }, todo, { onToggle: this.props.onToggle }));
             });
         };
         return React.createElement(
