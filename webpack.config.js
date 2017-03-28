@@ -17,7 +17,8 @@ module.exports = {
     resolve: {
         modules: [
             "node_modules",
-            "./App/components"
+            "./App/components",
+            "./App/api"
         ],
         alias:{
 
