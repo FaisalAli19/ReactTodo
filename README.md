@@ -1,7 +1,62 @@
-This is a React Todo App
+# React Todo App
 
-Created to practice my React skills.
+This is a react todo app which store the todo lists.
 
-You can find this app on heroku link below.
+Live version here: https://reacttodoapp19.herokuapp.com/
 
-Link: 
+## Skills Used
+
+* HTML
+* CSS (Sass)
+* ReactJs
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
+
+Clone the repository from here: https://github.com/FaisalAli19/ReactTodo.git or Download the Zip file to your machine.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+```
+NodeJs
+NPM
+```
+
+### Installing
+
+A step by step series of examples that tell you have to get a development env running and testing the app.
+
+Installing dependencies
+
+```
+npm install
+```
+
+Running server
+
+```
+npm start
+```
+
+Running webpack dev server
+
+```
+npm run dev
+```
+
+Running test
+
+```
+npm test
+```
+
+## Built With
+
+* [React](https://facebook.github.io/react/) - Created by Facebook Team.
+* [Moment](https://momentjs.com/) - Used to create the timestamp.
+* [Webpack](https://webpack.github.io/) - Used to bundle all the JavaScript file.
+* [Babel](https://babeljs.io/) - Used to convert Jsx syntax.
+* [Express](https://expressjs.com/) - Used as a server.
