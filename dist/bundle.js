@@ -37845,7 +37845,7 @@ var AddTodo = React.createClass({
     render: function () {
         return React.createElement(
             "div",
-            null,
+            { className: "container__footer" },
             React.createElement(
                 "form",
                 { onSubmit: this.handleSubmit },
@@ -37875,6 +37875,7 @@ var Todo = React.createClass({
 
     render: function () {
         var { id, text, completed, createdAt, completedAt } = this.props;
+        var todoClassName = completed ? "todo todo-completed" : "todo";
         var renderDate = () => {
             var message = "Created: ";
             var timeStamp = createdAt;
@@ -37888,19 +37889,27 @@ var Todo = React.createClass({
         };
         return React.createElement(
             'div',
-            { onClick: () => {
+            { className: todoClassName, onClick: () => {
                     this.props.onToggle(id);
                 } },
-            React.createElement('input', { type: 'checkbox', checked: completed }),
             React.createElement(
-                'p',
+                'div',
                 null,
-                text
+                React.createElement('input', { type: 'checkbox', checked: completed })
             ),
             React.createElement(
-                'p',
+                'div',
                 null,
-                renderDate()
+                React.createElement(
+                    'p',
+                    null,
+                    text
+                ),
+                React.createElement(
+                    'p',
+                    { className: 'todo__subtext' },
+                    renderDate()
+                )
             )
         );
     }
@@ -37970,9 +37979,26 @@ var TodoApp = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(TodoSearch, { onSearch: this.handleSearch }),
-            React.createElement(TodoList, { todos: filteredTodos, onToggle: this.handleToggle }),
-            React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
+            React.createElement(
+                'h1',
+                { className: 'page-title' },
+                'React Todo App'
+            ),
+            React.createElement(
+                'div',
+                { className: 'row' },
+                React.createElement(
+                    'div',
+                    { className: 'small-centered small-11 medium-6 large-5 column' },
+                    React.createElement(
+                        'div',
+                        { className: 'container' },
+                        React.createElement(TodoSearch, { onSearch: this.handleSearch }),
+                        React.createElement(TodoList, { todos: filteredTodos, onToggle: this.handleToggle }),
+                        React.createElement(AddTodo, { onAddTodo: this.handleAddTodo })
+                    )
+                )
+            )
         );
     }
 });
@@ -37995,6 +38021,13 @@ var TodoList = React.createClass({
     render: function () {
         var { todos } = this.props;
         var renderTodos = () => {
+            if (todos.length === 0) {
+                return React.createElement(
+                    'p',
+                    { className: 'container__message' },
+                    'Nothing To Do'
+                );
+            }
             return todos.map(todo => {
                 return React.createElement(Todo, _extends({ key: todo.id }, todo, { onToggle: this.props.onToggle }));
             });
@@ -38027,7 +38060,7 @@ var TodoSearch = React.createClass({
     render: function () {
         return React.createElement(
             "div",
-            null,
+            { className: "container__header" },
             React.createElement(
                 "div",
                 null,
@@ -39407,7 +39440,7 @@ exports = module.exports = __webpack_require__(103)();
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".page-title {\n  margin: 0;\n  padding: 2rem 0;\n  text-align: center; }\n\n.container {\n  background: #fafafa;\n  border: 1px solid #eeeeee;\n  border-radius: 5px;\n  padding: 0;\n  margin-bottom: 2rem; }\n\n.container__header {\n  border-bottom: 1px solid #eeeeee;\n  padding: 1rem; }\n  .container__header label {\n    cursor: pointer;\n    font-size: 1rem; }\n  .container__header > :last-child {\n    display: flex;\n    align-items: center; }\n\n.container__message {\n  color: #aaa;\n  margin: 2rem auto;\n  text-align: center; }\n\n.container__footer {\n  border-top: 1px solid #eeeeee;\n  padding: 1rem 1rem 0 1rem; }\n\n.todo {\n  align-items: center;\n  cursor: pointer;\n  display: flex;\n  padding: 1rem;\n  transition: background .3s ease; }\n  .todo p, .todo input {\n    margin: 0; }\n  .todo > :first-child {\n    margin-right: 1rem; }\n  .todo:hover {\n    background-color: #f0f0f0; }\n\n.todo__subtext {\n  color: #999; }\n\n.todo-completed p, .todo-completed .todo__subtext {\n  color: #aaa;\n  text-decoration: line-through; }\n", ""]);
 
 // exports
 
